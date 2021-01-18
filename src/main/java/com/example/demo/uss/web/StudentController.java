@@ -127,6 +127,6 @@ public class StudentController {
     @GetMapping("/find-by-gender/{gender}")
     public List<Student> findByGender(@PathVariable String gender) {
         logger.info(String.format("Find By %s from Students ...", gender));
-        return null; //studentService.selectByGender(gender);
+        return null; //studentService.selectByGender(gender)
     }
 }
