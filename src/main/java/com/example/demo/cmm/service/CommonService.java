@@ -14,7 +14,6 @@ import com.example.demo.cmm.utl.Vector;
 
 @Service
 public class CommonService {
-    @Autowired CommonMapper commonMapper;
     @Autowired Box<String> bx;
     @Autowired Vector<String> vc;
 
@@ -42,19 +41,15 @@ public class CommonService {
                 ;
         for(int i=0; i< l1.size(); i++) {
             map.put("DROP_TABLE", l1.get(i));
-            commonMapper.dropTable(map);
             map.clear();
         }
         for(int i=0; i< l2.size(); i++) {
             map.put("CREATE_TABLE", l2.get(i));
-            commonMapper.createTable(map);
             map.clear();
         }
         bx.put("TABLE_COUNT", Sql.TABLE_COUNT.toString());
 
-
-
-        return (commonMapper.tableCount(map)!=0) ? 1: 0;
+        return 0;
     }
     public int totalCount() {
         return 0;

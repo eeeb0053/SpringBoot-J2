@@ -1,16 +1,11 @@
 package com.example.demo.cmm.utl;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.cmm.service.CommonMapper;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import static com.example.demo.cmm.utl.Util.*;
 
 @Component("page") @Data @Lazy @NoArgsConstructor
 public class Pagination {
@@ -22,7 +17,7 @@ public class Pagination {
 	public final int BLOCK_SIZE = 5;
 	private String tname;
 	private boolean existPrev, existNext;
-	
+	public Pagination(){}
 	// SQL 방식
 	public Pagination(String tname, int pageSize, int pageNum, int count) {
 		this.tname = tname;

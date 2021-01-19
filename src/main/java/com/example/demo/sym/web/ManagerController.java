@@ -11,26 +11,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.cmm.enm.Messenger;
 import com.example.demo.cmm.utl.Box;
-import com.example.demo.sym.service.ManagerMapper;
+import com.example.demo.sym.service.ManagerRepository;
 import com.example.demo.sym.service.ManagerService;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/managers")
 public class ManagerController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired ManagerService managerService;
-    @Autowired ManagerMapper managerMapper;
+    @Autowired ManagerRepository managerRepository;
     @Autowired Box<String> bx;
     
     @PostMapping("")
     public Messenger register(@RequestBody Manager manager) {
         logger.info("등록하려는 관리자 정보: "+manager.toString());
-        return (managerService.register(manager) == 1) ? Messenger.SUCCESS : Messenger.FAILURE;
+        managerRepository.save(manager);
+        return Messenger.SUCCESS;
     }
     @PostMapping("/access")
-    public Manager login(@RequestBody Manager manager) {
+    public Optional<Manager> login(@RequestBody Manager manager) {
     	System.out.println("============= MGR ACCESS ============");
-    	return managerMapper.access(manager);
+        return managerRepository.findById(0);
     }
     
 }

@@ -1,15 +1,18 @@
 package com.example.demo.sts.service;
 
+import com.example.demo.sym.service.Teacher;
+import com.example.demo.uss.service.Student;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
 @ToString
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name="subjects")
 public class Subject {
 	@Id
@@ -18,11 +21,17 @@ public class Subject {
 	@Column(name = "subject") private String subject;
 	@Column(name = "description") private String description;
 
+	@OneToMany(mappedBy = "subject")
+	private List<Teacher> teacherList = new ArrayList<>();
+	@OneToMany(mappedBy = "subject")
+	private List<Grade> gradeList = new ArrayList<>();
+
 	@Builder
 	private Subject(String subject, String description){
 		this.subject = subject;
 		this.description = description;
 	}
+	public Subject(){}
 }
 
 /*
