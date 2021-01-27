@@ -1,12 +1,7 @@
 package com.example.demo.sym.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -20,6 +15,7 @@ import com.example.demo.sym.service.TeacherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@CrossOrigin(origins = "*")
 @RestController @RequestMapping("/teachers")
 public class TeacherController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
