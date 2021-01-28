@@ -1,7 +1,5 @@
 package com.example.demo.sts.service;
-
 import com.example.demo.sym.service.Teacher;
-import com.example.demo.uss.service.Student;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -27,13 +25,12 @@ public class Subject {
 	private List<Grade> gradeList = new ArrayList<>();
 
 	@Builder
-	private Subject(String subject, String description){
+	private Subject( String subject, String description){
 		this.subject = subject;
 		this.description = description;
 	}
-	public Subject(){}
-}
 
-/*
-create table subjects (sub_num int primary key auto_increment, subject varchar(100), description varchar(200));
- */
+	public Subject(){}
+
+
+}

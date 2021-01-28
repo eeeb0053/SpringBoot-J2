@@ -1,15 +1,4 @@
 package com.example.demo.uss.web;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.cmm.enm.Messenger;
 import com.example.demo.cmm.enm.Sql;
 import com.example.demo.cmm.enm.Table;
@@ -22,21 +11,34 @@ import com.example.demo.sym.service.TeacherService;
 import com.example.demo.uss.service.Student;
 import com.example.demo.uss.service.StudentRepository;
 import com.example.demo.uss.service.StudentService;
-import static com.example.demo.cmm.utl.Util.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import static com.example.demo.cmm.utl.Util.integer;
+import static com.example.demo.cmm.utl.Util.string;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/students")
+@CrossOrigin(origins="*")
 public class StudentController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired StudentService studentService;
     @Autowired GradeService gradeService;
-    @Autowired StudentRepository studentRepository;
+    @Autowired
+    StudentRepository studentRepository;
     @Autowired SubjectService subjectService;
     @Autowired TeacherService teacherService;
     @Autowired ManagerService managerService;
     @Autowired Pagination page;
     @Autowired Box<String> bx;
+
     @PostMapping("")
     public String register(@RequestBody Student s){
         studentRepository.save(s);
@@ -86,7 +88,6 @@ public class StudentController {
     public Messenger update(@RequestBody Student s){
         return Messenger.SUCCESS;
     }
-
     @DeleteMapping("")
     public Messenger delete(@RequestBody Student s){
         logger.info("Students Deleted Execute ...");
@@ -101,7 +102,7 @@ public class StudentController {
         map.put("TOTAL_COUNT", Sql.TOTAL_COUNT.toString() + Table.STUDENTS);
         if(studentRepository.count() == 0) {
             managerService.insertMany(1);
-            subjectService.insertMany();
+            subjectService.insertMany(5);
             studentService.insertMany(Integer.parseInt(count));
             teacherService.insertMany(5);
             //gradeService.insertMany(Integer.parseInt(count)); 나중에 추가함

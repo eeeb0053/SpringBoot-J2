@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.uss.service.Student;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +34,9 @@ public class Article {
         this.count = count;
         this.writerNum = writerNum;
     }
+
+
+
+
+
 }
-/*
-create table articles(
-	art_num int primary key,
-	title varchar2(20),
-	content varchar2(20),
-	count varchar2(20),
-	writer_num int
-	)
-*/

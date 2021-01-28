@@ -1,21 +1,16 @@
 package com.example.demo.sym.service;
 
+
 import static com.example.demo.cmm.utl.Util.*;
-import static com.example.demo.cmm.utl.Util.mySkip;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.reducing;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 import java.util.ArrayList;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.cmm.utl.Box;
 import com.example.demo.cmm.utl.DummyGenerator;
@@ -24,29 +19,30 @@ import com.example.demo.sts.service.GradeVo;
 import com.example.demo.sts.service.SubjectRepository;
 
 @Service
-public class TeacherService{
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired TeacherRepository teacherRepository;
-    @Autowired SubjectRepository subjectRepository;
-    @Autowired DummyGenerator dummy;
-    @Autowired Box<Object> bx;
-    
-    @Transactional
-    public void  insertMany(int count) {
-    	// teacher 는 subject 5 까지만 입력
-    	var tlist = new ArrayList<Teacher>();
-    	Teacher t = null;
-    	for(int i = 0; i < count; i++) {
-    		t = dummy.makeTeacher(i+1);
+public class TeacherService {
+	@Autowired
+	TeacherRepository teacherRepository;
+	@Autowired
+	SubjectRepository subjectRepository;
+	@Autowired DummyGenerator dummy;
+	@Autowired Box<Object> bx;
+
+	public void insertMany(int count) {
+
+		// teacher 는 subject 수인 5까지만 입력
+		var tlist = new ArrayList<Teacher>();
+		Teacher t = null;
+
+		for(int i=0; i< count; i++) {
+			t = dummy.makeTeacher(i+1);
 			teacherRepository.save(t);
-    	}
 
-    }
-    
-    public void register(Teacher teacher) {
-    	teacherRepository.save(teacher);
-    }
+		}
+	}
 
+	public void register(Teacher teacher) {
+		teacherRepository.save(teacher);
+	}
 	public Map<?,?> selectAllBySubject(Box<String> param){
 		String pageNum = param.get("pageNum").toString();
 		String pageSize = param.get("pageSize").toString();

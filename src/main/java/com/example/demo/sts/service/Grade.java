@@ -1,6 +1,5 @@
 package com.example.demo.sts.service;
 
-
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -14,7 +13,8 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name="grades")
-public class Grade{
+public class Grade {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "grd_num") private int grdNum;
@@ -24,24 +24,31 @@ public class Grade{
     @Column(name = "pass_exam") private String passExam;
 
     @ManyToOne
-    @JoinColumn(name = "sub_num")
+    @JoinColumn(name="sub_num")
     private Subject subject;
+
     @ManyToOne
     @JoinColumn(name = "stu_num")
     private Student student;
 
-    public Grade(int stuNum, int subNum, String examDate, int score) {
-    	this.examDate = examDate;
-    	this.score = score;
-    }
 
+    public Grade(String examDate, int score) {
+        this.examDate = examDate;
+        this.score = score;
+    }
     @Builder
-    private Grade(int stuNum, int subNum, int score, String grade, String examDate, String passExam){
+    private Grade(int stuNum,
+                  int subNum,
+                  int score,
+                  String grade,
+                  String examDate,
+                  String passExam){
         this.score = score;
         this.grade = grade;
         this.examDate = examDate;
         this.passExam = passExam;
     }
+
 }
 /*
 create table grades2(

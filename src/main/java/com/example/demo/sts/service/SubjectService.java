@@ -4,6 +4,7 @@ import com.example.demo.cmm.utl.Box;
 import com.example.demo.cmm.utl.DummyGenerator;
 import com.example.demo.cmm.utl.Vector;
 import com.example.demo.sym.service.TeacherRepository;
+
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +12,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SubjectService {
-    @Autowired SubjectRepository subjectRepository;
-    @Autowired TeacherRepository teacherRepository;
-    @Autowired DummyGenerator dummy;
+	@Autowired
+	SubjectRepository subjectRepository;
+	@Autowired
+	TeacherRepository teacherRepository;
+	@Autowired DummyGenerator dummy;
 	@Autowired Vector<Subject> vcSubject;
 	@Autowired Vector<GradeVo> vcGradeVo;
 	@Autowired Box<Vector<GradeVo>> bx;
-    
-    public void  insertMany() {
+
+	public void insertMany(int count) {
+
 		var l1 = Arrays.asList("Java","Spring","Python","jQuery","eGovframe");
 		var l2 = Arrays.asList("Java 언어","Spring 프레임워크","Python 언어","jQuery 라이브러리","전자정부 ");
 		Subject s = null;
 		vcSubject.clear();
-		for(int i=0; i< l1.size(); i++) {
+		for(int i=0; i< count; i++) {
 			s = new Subject();
 			subjectRepository.save(s);
 		}
-    }
+	}
+
 	public Vector<GradeVo> groupBySubject(Box<String> bx){ //210
 		/*
 		List<GradeVo> l = subjectRepository.groupBySubject(bx.get());
