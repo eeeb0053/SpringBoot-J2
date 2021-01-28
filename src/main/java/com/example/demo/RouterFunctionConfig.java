@@ -34,7 +34,7 @@ public class RouterFunctionConfig {
     @GetMapping("/test")
     public Map<?,?> hello(){
         System.out.println("React & Boot 서버 연결");
-        Map<String, String> map = new HashMap<>();
+        var map = new HashMap<String, String>();
         map.put("a", "a");
         map.put("b", "b");
         return map;
