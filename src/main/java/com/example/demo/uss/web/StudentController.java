@@ -38,9 +38,9 @@ public class StudentController {
     @Autowired Pagination page;
     @Autowired Box<String> bx;
     @PostMapping("")
-    public Messenger register(@RequestBody Student s){
+    public String register(@RequestBody Student s){
         studentRepository.save(s);
-        return studentRepository.count()==1?Messenger.SUCCESS:Messenger.FAILURE;
+        return "redirect:/login";
     }
     @PostMapping("/login")
     public Map<?,?> login(@RequestBody Student s){
